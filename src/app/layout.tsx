@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import SideBar from "@/components/sidebar"
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -14,8 +14,26 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+            </head>
             <body>
-                {children}
+                <div className="relative min-h-screen w-full m-0 p-0 flex font-[Raleway]">
+                    {/* Sidebar for desktop */}
+                    <div className="hidden md:block fixed top-0 left-0 h-screen w-80 z-40">
+                        <SideBar />
+                    </div>
+                    {/* Sidebar for mobile */}
+                    <div className="block md:hidden">
+                        <SideBar />
+                    </div>
+                    {/* Main content */}
+                    <main className="flex-1 w-full md:ml-80">
+                        {children}
+                    </main>
+                </div>
             </body>
         </html>
     );
