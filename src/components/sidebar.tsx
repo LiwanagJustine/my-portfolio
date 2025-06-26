@@ -10,7 +10,18 @@ export default function SideBar() {
     const [hobbiesOpen, setHobbiesOpen] = useState(false);
     const pathname = usePathname();
 
-    const hobbyRoutes = ["/music", "/watching", "/guitar", "/sing", "/banding"];
+    const hobbyRoutes = [
+        "/music",
+        "/watching",
+        "/guitar",
+        "/sing",
+        "/banding",
+        "/hobbies/music",
+        "/hobbies/watching",
+        "/hobbies/guitar",
+        "/hobbies/sing",
+        "/hobbies/banding"
+    ];
     const isHobbyActive = hobbyRoutes.includes(pathname);
 
     // Open hobbies dropdown if a hobbies subpage is active, close sidebar on navigation (mobile)
@@ -116,11 +127,6 @@ export default function SideBar() {
                                         <li>
                                             <Link href="/hobbies/guitar" className={`ml-3 transition-colors duration-200 ${pathname === "/hobbies/guitar" ? "text-white" : "text-[#a8a9b4] hover:text-white"}`}>
                                                 Playing Guitar
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/hobbies/sing" className={`ml-3 transition-colors duration-200 ${pathname === "/hobbies/sing" ? "text-white" : "text-[#a8a9b4] hover:text-white"}`}>
-                                                Singing
                                             </Link>
                                         </li>
                                         <li>
