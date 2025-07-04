@@ -1,4 +1,35 @@
 @import "tailwindcss";
+
+/* CSS Variables for theme colors */
+:root {
+  --bg-primary: #f7fafd;
+  --bg-secondary: #e3eaff;
+  --text-primary: #22223b;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --card-bg: rgba(255, 255, 255, 0.4);
+  --card-border: rgba(255, 255, 255, 0.3);
+}
+
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --sidebar-bg: #040b14;
+  --sidebar-border: transparent;
+  --card-bg: rgba(31, 41, 55, 0.4);
+  --card-border: rgba(75, 85, 99, 0.3);
+}
+
+/* Fast theme transitions */
+* {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
 @keyframes scaleIn {
   0% {
     transform: scale(0.8);
@@ -18,4 +49,115 @@
 }
 .scale-in-time-03 {
   animation: scaleIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Optimized sidebar transitions */
+.sidebar-panel {
+  transform: translateX(-100%);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.sidebar-panel.open {
+  transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .sidebar-panel {
+    transform: translateX(0);
+    position: static;
+    will-change: auto;
+  }
+}
+
+/* Performance optimizations for menu items */
+.menu-item {
+  will-change: background-color, color;
+  contain: layout style;
+}
+
+.menu-item:hover {
+  will-change: auto;
+}
+
+/* Theme toggle optimizations */
+.theme-toggle {
+  will-change: background-color, color;
+  contain: layout style;
+}
+
+/* Smooth dropdown animations */
+.dropdown-content {
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.2s ease;
+}
+
+/* Loading animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loading-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.loading-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+/* Page transition effects */
+.page-transition {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.page-entering {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optimized loading spinner */
+.loading-spinner {
+  will-change: transform;
+  contain: layout style;
+}
+
+/* Prevent layout shift during loading */
+.loading-container {
+  contain: layout style;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

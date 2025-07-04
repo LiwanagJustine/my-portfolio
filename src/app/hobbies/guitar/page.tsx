@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Guitar() {
+    const { theme } = useTheme();
     const images = [
         "/images/animes/demon slayer.jpg",
         "/images/animes/naruto.jpg",
@@ -23,13 +25,21 @@ export default function Guitar() {
 
     return (
         <>
-            <div className="about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]">
+            <div className={`about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] transition-colors duration-300 ${
+                theme === 'dark' 
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800' 
+                    : 'bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]'
+            }`}>
                 <div className="header mb-8 scale-in-time-01">
-                    <h2 className="font-bold text-3xl sm:text-4xl text-[#22223b] tracking-tight">Playing Guitar</h2>
+                    <h2 className={`font-bold text-3xl sm:text-4xl tracking-tight ${
+                        theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                    }`}>Playing Guitar</h2>
                     <div className="border-b-4 border-[#149ddd] w-16 mt-4 rounded"></div>
                 </div>
                 <div className="content mt-8 scale-in-time-02">
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                    <p className={`text-base sm:text-lg leading-relaxed ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
                         Hi, I'm a curious and creative individual who enjoys exploring how things work, both in life and in tech. Born and raised in Longos, Calumpit, Bulacan, I've always been fascinated by how small ideas can turn into big solutions.
                     </p>
                 </div>
@@ -79,7 +89,11 @@ export default function Guitar() {
                         {images.map((_, idx) => (
                             <button
                                 key={idx}
-                                className={`w-3 h-3 rounded-full border-2 border-[#149ddd] transition-all duration-300 ${idx === current ? 'bg-[#149ddd] scale-125 shadow' : 'bg-gray-200 scale-100'}`}
+                                className={`w-3 h-3 rounded-full border-2 border-[#149ddd] transition-all duration-300 ${
+                                    idx === current 
+                                        ? 'bg-[#149ddd] scale-125 shadow' 
+                                        : (theme === 'dark' ? 'bg-gray-600 scale-100' : 'bg-gray-200 scale-100')
+                                }`}
                                 onClick={() => setCurrent(idx)}
                                 aria-label={`Go to slide ${idx + 1}`}
                             />

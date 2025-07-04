@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Music() {
+    const { theme } = useTheme();
     const images = [
         {
             src: "/images/music01.jpg",
@@ -49,13 +51,21 @@ export default function Music() {
     }, [images.length, visibleCount]);
 
     return (
-        <div className="about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]">
+        <div className={`about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] transition-colors duration-300 ${
+            theme === 'dark' 
+                ? 'bg-gradient-to-br from-gray-900 to-gray-800' 
+                : 'bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]'
+        }`}>
             <div className="header mb-8 scale-in-time-01">
-                <h2 className="font-bold text-3xl sm:text-4xl text-[#22223b] tracking-tight">Listening Music</h2>
+                <h2 className={`font-bold text-3xl sm:text-4xl tracking-tight ${
+                    theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                }`}>Listening Music</h2>
                 <div className="border-b-4 border-[#149ddd] w-16 mt-4 rounded"></div>
             </div>
             <div className="content mt-8 scale-in-time-02">
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                <p className={`text-base sm:text-lg leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
                     I enjoy exploring different genres of music as a way to relax, stay inspired, and connect with different cultures and emotions. Music fuels my creativity and often helps me focus and recharge.
                 </p>
             </div>
@@ -69,12 +79,15 @@ export default function Music() {
                                 className="flex-1 hover:scale-105 transition-all duration-300"
                             >
                                 <div className="short-description flex items-start px-4 pt-4">
-                                    <span className="w-[400px] h-[140px] bg-white text-gray-700 font-semibold px-4 py-2 rounded-2xl relative text-md shadow-lg
-                                        flex items-center justify-center text-center
+                                    <span className={`w-[400px] h-[140px] font-semibold px-4 py-2 rounded-2xl relative text-md shadow-lg
+                                        flex items-center justify-center text-center transition-colors duration-300
                                         before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:-bottom-2 before:w-0 before:h-0
                                         before:border-l-8 before:border-l-transparent
                                         before:border-r-8 before:border-r-transparent
-                                        before:border-t-8 before:border-t-white">
+                                        ${theme === 'dark' 
+                                            ? 'bg-gray-800 text-gray-200 before:border-t-8 before:border-t-gray-800' 
+                                            : 'bg-white text-gray-700 before:border-t-8 before:border-t-white'
+                                        }`}>
                                         {img.short}
                                     </span>
                                 </div>
@@ -84,7 +97,9 @@ export default function Music() {
                                     className="w-[90px] h-[90px] rounded-full object-cover mx-auto mt-6 shadow-lg"
                                 />
                                 <div className="p-4">
-                                    <p className="text-gray-700 font-semibold text-center">{img.desc}</p>
+                                    <p className={`font-semibold text-center ${
+                                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                                    }`}>{img.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -95,7 +110,11 @@ export default function Music() {
                         <button
                             key={idx}
                             onClick={() => setStart(idx)}
-                            className={`w-3 h-3 rounded-full ${start === idx ? "bg-blue-500" : "bg-gray-300"}`}
+                            className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+                                start === idx 
+                                    ? "bg-blue-500" 
+                                    : (theme === 'dark' ? "bg-gray-600" : "bg-gray-300")
+                            }`}
                             aria-label={`Go to slide ${idx + 1}`}
                         />
                     ))}

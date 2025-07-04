@@ -1,4 +1,8 @@
+"use client";
+import { useTheme } from "@/contexts/ThemeContext";
+
 export default function Watching() {
+    const { theme } = useTheme();
 
     const animeList = [
         {
@@ -37,13 +41,21 @@ export default function Watching() {
 
     return (
         <>
-            <div className="about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]">
+            <div className={`about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] transition-colors duration-300 ${
+                theme === 'dark' 
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800' 
+                    : 'bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]'
+            }`}>
                 <div className="header mb-8 scale-in-time-01">
-                    <h2 className="font-bold text-3xl sm:text-4xl text-[#22223b] tracking-tight">Watching Anime</h2>
+                    <h2 className={`font-bold text-3xl sm:text-4xl tracking-tight ${
+                        theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                    }`}>Watching Anime</h2>
                     <div className="border-b-4 border-[#149ddd] w-16 mt-4 rounded"></div>
                 </div>
                 <div className="content mt-8 scale-in-time-02">
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                    <p className={`text-base sm:text-lg leading-relaxed ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
                         Hi, I'm a curious and creative individual who enjoys exploring how things work, both in life and in tech. Born and raised in Longos, Calumpit, Bulacan, I've always been fascinated by how small ideas can turn into big solutions.
                     </p>
                 </div>
@@ -52,7 +64,11 @@ export default function Watching() {
                         {animeList.map((anime, idx) => (
                             <div
                                 key={idx}
-                                className="anime-item relative bg-white rounded-2xl border border-[#e0e7ff] shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 hover:scale-105 flex flex-col items-center w-70 mx-auto"
+                                className={`anime-item relative rounded-2xl border shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 hover:scale-105 flex flex-col items-center w-70 mx-auto ${
+                                    theme === 'dark' 
+                                        ? 'bg-gray-800 border-gray-600' 
+                                        : 'bg-white border-[#e0e7ff]'
+                                }`}
                             >
                                 <div className="relative w-full h-80">
                                     <img

@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import AlbumModal from "@/components/modal/album";
 
 export default function Banding() {
+    const { theme } = useTheme();
     const [openAlbum, setOpenAlbum] = useState<string | null>(null);
 
     const jaggingImages = [
@@ -59,13 +61,21 @@ export default function Banding() {
 
     return (
         <>
-            <div className="about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]">
+            <div className={`about-container min-h-screen w-full p-8 md:p-24 font-[Raleway] transition-colors duration-300 ${
+                theme === 'dark' 
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800' 
+                    : 'bg-gradient-to-br from-[#f7fafd] to-[#e3eaff]'
+            }`}>
                 <div className="header mb-8 scale-in-time-01">
-                    <h2 className="font-bold text-3xl sm:text-4xl text-[#22223b] tracking-tight">Family Banding</h2>
+                    <h2 className={`font-bold text-3xl sm:text-4xl tracking-tight ${
+                        theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                    }`}>Family Banding</h2>
                     <div className="border-b-4 border-[#149ddd] w-16 mt-4 rounded"></div>
                 </div>
                 <div className="content mt-8 scale-in-time-02">
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
+                    <p className={`text-base sm:text-lg leading-relaxed ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
                         Hi, I'm a curious and creative individual who enjoys exploring how things work, both in life and in tech. Born and raised in Longos, Calumpit, Bulacan, I've always been fascinated by how small ideas can turn into big solutions.
                     </p>
                 </div>
@@ -73,7 +83,11 @@ export default function Banding() {
                     <div className="album-container mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                         {/* Album: Jagging */}
                         <div
-                            className="album group bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-transform hover:-translate-y-2 hover:shadow-2xl border border-transparent hover:border-[#149ddd]/30"
+                            className={`album group rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border hover:border-[#149ddd]/30 ${
+                                theme === 'dark' 
+                                    ? 'bg-gray-800 border-gray-600' 
+                                    : 'bg-white border-transparent'
+                            }`}
                             onClick={() => setOpenAlbum(openAlbum === "jagging" ? null : "jagging")}
                         >
                             <div className="relative mb-5">
@@ -84,14 +98,22 @@ export default function Banding() {
                                 />
                                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#149ddd] text-white text-xs px-3 py-1 rounded-full shadow group-hover:scale-110 transition-transform">Jagging</span>
                             </div>
-                            <h3 className="font-bold text-xl text-[#22223b] mb-2 text-center">Jogging</h3>
-                            <p className="text-gray-500 text-center text-sm">
+                            <h3 className={`font-bold text-xl mb-2 text-center ${
+                                theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                            }`}>Jogging</h3>
+                            <p className={`text-center text-sm ${
+                                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                            }`}>
                                 Fun moments jogging sessions.
                             </p>
                         </div>
                         {/* Album: Eating */}
                         <div
-                            className="album group bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-transform hover:-translate-y-2 hover:shadow-2xl border border-transparent hover:border-[#149ddd]/30"
+                            className={`album group rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border hover:border-[#149ddd]/30 ${
+                                theme === 'dark' 
+                                    ? 'bg-gray-800 border-gray-600' 
+                                    : 'bg-white border-transparent'
+                            }`}
                             onClick={() => setOpenAlbum(openAlbum === "eating" ? null : "eating")}
                         >
                             <div className="relative mb-5">
@@ -102,14 +124,22 @@ export default function Banding() {
                                 />
                                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#149ddd] text-white text-xs px-3 py-1 rounded-full shadow group-hover:scale-110 transition-transform">Eating</span>
                             </div>
-                            <h3 className="font-bold text-xl text-[#22223b] mb-2 text-center">Eating</h3>
-                            <p className="text-gray-500 text-center text-sm">
+                            <h3 className={`font-bold text-xl mb-2 text-center ${
+                                theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                            }`}>Eating</h3>
+                            <p className={`text-center text-sm ${
+                                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                            }`}>
                                 Delicious memories meals.
                             </p>
                         </div>
                         {/* Album: Travel */}
                         <div
-                            className="album group bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-transform hover:-translate-y-2 hover:shadow-2xl border border-transparent hover:border-[#149ddd]/30"
+                            className={`album group rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border hover:border-[#149ddd]/30 ${
+                                theme === 'dark' 
+                                    ? 'bg-gray-800 border-gray-600' 
+                                    : 'bg-white border-transparent'
+                            }`}
                             onClick={() => setOpenAlbum(openAlbum === "travel" ? null : "travel")}
                         >
                             <div className="relative mb-5">
@@ -120,14 +150,22 @@ export default function Banding() {
                                 />
                                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#149ddd] text-white text-xs px-3 py-1 rounded-full shadow group-hover:scale-110 transition-transform">Travel</span>
                             </div>
-                            <h3 className="font-bold text-xl text-[#22223b] mb-2 text-center">Travel</h3>
-                            <p className="text-gray-500 text-center text-sm">
+                            <h3 className={`font-bold text-xl mb-2 text-center ${
+                                theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                            }`}>Travel</h3>
+                            <p className={`text-center text-sm ${
+                                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                            }`}>
                                 Adventures from travels.
                             </p>
                         </div>
                         {/* Album: Together */}
                         <div
-                            className="album group bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-transform hover:-translate-y-2 hover:shadow-2xl border border-transparent hover:border-[#149ddd]/30"
+                            className={`album group rounded-2xl shadow-xl p-6 flex flex-col items-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border hover:border-[#149ddd]/30 ${
+                                theme === 'dark' 
+                                    ? 'bg-gray-800 border-gray-600' 
+                                    : 'bg-white border-transparent'
+                            }`}
                             onClick={() => setOpenAlbum(openAlbum === "together" ? null : "together")}
                         >
                             <div className="relative mb-5">
@@ -138,8 +176,12 @@ export default function Banding() {
                                 />
                                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#149ddd] text-white text-xs px-3 py-1 rounded-full shadow group-hover:scale-110 transition-transform">Together</span>
                             </div>
-                            <h3 className="font-bold text-xl text-[#22223b] mb-2 text-center">Together</h3>
-                            <p className="text-gray-500 text-center text-sm">
+                            <h3 className={`font-bold text-xl mb-2 text-center ${
+                                theme === 'dark' ? 'text-white' : 'text-[#22223b]'
+                            }`}>Together</h3>
+                            <p className={`text-center text-sm ${
+                                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                            }`}>
                                 Cherished moments spent together.
                             </p>
                         </div>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SideBar from "@/components/sidebar"
+import SideBar from "@/components/sidebar";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { LoadingProvider } from "@/contexts/LoadingContext";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -13,27 +16,53 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="h-full dark">
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                try {
+                                    var theme = localStorage.getItem('theme');
+                                    if (theme === 'light') {
+                                        document.documentElement.classList.remove('dark');
+                                    } else if (!theme) {
+                                        // Check system preference
+                                        if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                                            document.documentElement.classList.remove('dark');
+                                        }
+                                    }
+                                } catch (e) {
+                                    // Keep dark as default if any error occurs
+                                }
+                            })();
+                        `,
+                    }}
+                />
             </head>
-            <body>
-                <div className="relative min-h-screen w-full m-0 p-0 flex font-[Raleway]">
-                    {/* Sidebar for desktop */}
-                    <div className="hidden md:block fixed top-0 left-0 h-screen w-80 z-40">
-                        <SideBar />
-                    </div>
-                    {/* Sidebar for mobile */}
-                    <div className="block md:hidden">
-                        <SideBar />
-                    </div>
-                    {/* Main content */}
-                    <main className="flex-1 w-full md:ml-80">
-                        {children}
-                    </main>
-                </div>
+            <body className="h-full">
+                <ThemeProvider>
+                    <LoadingProvider>
+                        <LoadingSpinner />
+                        <div className="relative min-h-screen w-full m-0 p-0 flex font-[Raleway] bg-white dark:bg-gray-900 transition-colors duration-300">
+                            {/* Sidebar for desktop */}
+                            <div className="hidden md:block fixed top-0 left-0 h-screen w-80 z-40">
+                                <SideBar />
+                            </div>
+                            {/* Sidebar for mobile */}
+                            <div className="block md:hidden">
+                                <SideBar />
+                            </div>
+                            {/* Main content */}
+                            <main className="flex-1 w-full md:ml-80">
+                                {children}
+                            </main>
+                        </div>
+                    </LoadingProvider>
+                </ThemeProvider>
             </body>
         </html>
     );
